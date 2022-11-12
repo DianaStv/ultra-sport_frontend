@@ -1,0 +1,47 @@
+<div class="login-card">
+  <p class="card-title" color="black">Вхід</p>
+
+  <mat-card class="card-content">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="input-wrappers">
+        <mat-form-field appearance="outline" >
+          <mat-label>Email:</mat-label>
+          <input formControlName="email" matInput placeholder="Email" type="email">
+          <mat-error *ngIf="form.get('email').invalid && form.get('email').touched">
+            <span *ngIf="form.get('email').errors['required']">
+              Ви не вказали email
+            </span>
+            <span *ngIf="form.get('email').errors['email']">
+              Ви вказали невірний email
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Passowrd:</mat-label>
+          <input formControlName="password" matInput placeholder="Password">
+          <mat-error *ngIf="form.get('password').invalid && form.get('password').touched">
+            <span *ngIf="form.get('password').errors['required']">
+              Ви не вказали пароль
+            </span>
+            <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
+              Пароль повинен бути не менше {{form.get('password').errors['minlength']['requiredLength']}} символів
+            </span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="card-action">
+        <button
+          mat-raised-button
+          backgroundColor="primary-yellow"
+          type="submit"
+          [disabled]="form.invalid || form.disabled"
+        >Увійти</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

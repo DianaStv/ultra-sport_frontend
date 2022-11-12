@@ -1,1 +1,127 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@import "assets/theming/variables";
+@import "assets/theming/default_class";
+@import "assets/theming/global_variables";
+@import "assets/theming/extended_colors";
+@import "assets/theming/button_toggle_extended";
+@import "assets/theming/brand";
+
+$custom-typography: mat.define-typography-config(
+  $font-family: "Montserrat, sans-serif"
+);
+
+@include mat.core($custom-typography);
+
+@mixin setting-theme($theme) {
+  @include mat-color-extended($theme);
+}
+
+@include mat.all-component-themes($dark-theme);
+@include setting-theme($dark-theme);
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dn {
+  display: none;
+}
+
+.spacer {
+  flex: 1 1 100%;
+}
+
+.mat-drawer-container {
+  background-color: $color-white;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 1200px;
+  padding-top: 40px;
+  margin: auto;
+
+  .return-back {
+    display: flex;
+    align-items: center;
+    width: 124px;
+    font-size: 14px;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 15px;
+    p {
+      margin: 0;
+    }
+    p:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  .page-title {
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  .item-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 4px;
+    img {
+      width: inherit;
+      height: inherit;
+    }
+  }
+
+  .image-block {
+    width: 640px;
+    height: 640px;
+
+    img {
+      width: inherit;
+      height: inherit;
+      box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+                  0px 2px 2px 0px rgb(0 0 0 / 14%),
+                  0px 1px 5px 0px rgb(0 0 0 / 12%);
+    }
+
+    .upload-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: inherit;
+      height: inherit;
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  button {
+    height: 45px;
+  }
+}
+
+.message {
+  font-size: 18px;
+}
+
+.center {
+  text-align: center;
+}
+
+.loader {
+  height: 100%;
+}
+
+.mat-table {
+  width: 100%;
+}

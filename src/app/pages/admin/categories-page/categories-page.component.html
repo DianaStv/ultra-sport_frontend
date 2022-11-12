@@ -1,0 +1,85 @@
+<div class="page-wrapper">
+  <div class="page-title">
+    <p>{{sex}} > {{category}} > {{product}}</p>
+  </div>
+
+  <div class="page-actions">
+    <div class="search-block">
+      <app-search-input
+        [placeholder]="'Назва товару'"
+        (searchInput)="searchByInput($event)"
+      ></app-search-input>
+    </div>
+
+    <button
+      mat-raised-button
+      backgroundColor="gray-dark"
+      class="add-button"
+      (click)="openAddPage()"
+      >Додати</button>
+  </div>
+
+  <div class="container" *ngIf="!loading; else loader">
+    <ng-container *ngIf="categories.length !== 0; else empty">
+      <mat-list role="list" class="list">
+        <mat-list-item
+          role="listitem"
+          class="list-item"
+          [ngClass]="{'disabled': disabledItem(category)}"
+          *ngFor="let category of categories"
+        >
+          <div class="item-content">
+            <div class="item-image">
+              <img [src]="category.imageSrc">
+            </div>
+            <div class="item-description">
+              <p class="name">{{category.name}}</p>
+              <p class="price">{{category.price}} грн</p>
+              <p class="sizes-title">Таблиця розмірів:</p>
+              <div class="sizes">
+                <ng-container *ngFor="let size of category.sizes">
+                  <app-size-block [size]="size.size" [amount]="size.amount"></app-size-block>
+                </ng-container>
+              </div>
+            </div>
+            <div class="open-icon">
+              <button mat-icon-button>
+                <mat-icon
+                  class="mat-icon-s32"
+                  (click)="editCategory(category._id)"
+                >open_in_new</mat-icon>
+              </button>
+            </div>
+            <div class="open-icon">
+              <button mat-icon-button>
+                <mat-icon
+                  class="mat-icon-s32"
+                  (click)="deleteCategory(category._id)"
+                >delete_outline</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-paginator [length]="params.length"
+                     [pageIndex]="params.offset"
+                     [pageSize]="params.limit"
+                     (page)="changePage($event)"
+                     aria-label="Select page">
+      </mat-paginator>
+    </ng-container>
+
+    <ng-template #empty>
+      <div class="message center">
+        У даній категорії ще нема товарів
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-template #loader>
+    <div class="loader">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,9 @@
+@import "../../../../assets/theming/variables";
+
+main {
+  height: calc(100% - $header-height);
+}
+
+.sidenav-container {
+  height: 100%;
+}

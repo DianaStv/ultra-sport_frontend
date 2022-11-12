@@ -1,0 +1,77 @@
+<div class="page-wrapper">
+  <div class="page-title">
+    <p>Кошик</p>
+  </div>
+
+  <ng-container *ngIf="!loading; else loader">
+    <div class="page-content" *ngIf="orders.length; else empty">
+      <div class="order-list">
+        <mat-list role="list" class="list">
+          <ng-container *ngFor="let order of orders; let i = index">
+            <mat-divider class="dashed-divider" *ngIf="i !== 0"></mat-divider>
+
+            <mat-list-item role="listitem" class="list-item" >
+              <div class="item-content">
+                <div class="item-image">
+                  <img [src]="order.category.imageSrc">
+                </div>
+                <div class="item-description">
+                  <p class="name">{{order.category.name}}</p>
+                  <p class="size">{{order.size.size}}</p>
+                  <p class="price">{{order.category.price * order.amount}} грн</p>
+                  <app-amount-block
+                    [amount]="order.amount"
+                    [maxAmount]="order.size.amount"
+                    (addOne)="changeAmount($event, i)"
+                    (removeOne)="changeAmount($event, i)"
+                    (deleteItem)="deleteOrder(i)"
+                  ></app-amount-block>
+                </div>
+              </div>
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </div>
+
+      <div class="order-check">
+        <div>
+          <p>
+            <span *ngIf="check.amount === 1">{{check.amount}} товар на суму</span>
+            <span *ngIf="check.amount > 1">{{check.amount}} товари на суму</span>
+          </p>
+          <p>{{check.sum}} грн</p>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="sum">
+          <p>До сплати</p>
+          <p>{{check.sum}} грн</p>
+        </div>
+        <mat-divider></mat-divider>
+        <button
+          mat-raised-button
+          backgroundColor="primary-yellow"
+          (click)="createOrder()"
+          [disabled]="pending">
+          Оформити замовлення
+        </button>
+      </div>
+    </div>
+
+    <ng-template #empty>
+      <div class="empty-basket">
+        <mat-icon class="mat-icon-s60">add_shopping_cart</mat-icon>
+        <p>Кошик порожній</p>
+
+        <button mat-raised-button
+          backgroundColor="primary-yellow"
+          (click)="goToShopping()">
+          Перейти до покупок
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

@@ -1,0 +1,7 @@
+<div class="size-block"
+     (click)="add($event)"
+     [ngClass]="{'selected': selected, 'disabled': size.amount === 0}"
+>
+  <p class="size">{{size.size}}</p>
+  <p class="amount">Кількість: {{size.amount}}</p>
+</div>

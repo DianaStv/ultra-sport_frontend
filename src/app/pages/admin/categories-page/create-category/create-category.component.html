@@ -1,0 +1,181 @@
+<div class="page-wrapper">
+  <a class="return-back" (click)="back()">
+    <mat-icon class="mat-icon-s12">arrow_back_ios</mat-icon>
+    <p>Назад</p>
+  </a>
+  <div class="page-title">
+    <p>Додати новий вид товару</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="page-content" *ngIf="!loading; else loader">
+
+      <div class="image-block">
+        <img *ngIf="imagePreview" [src]="imagePreview">
+        <div *ngIf="!imagePreview" class="upload-image">
+          <mat-icon class="mat-icon-s48" color="gray-dark">cloud_upload</mat-icon>
+        </div>
+      </div>
+
+      <div class="description-block">
+        <mat-form-field appearance="outline">
+          <mat-label>Стать</mat-label>
+          <mat-select formControlName="sex">
+            <ng-container *ngFor="let item of sex">
+              <mat-option [value]="item.value">{{item.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="form.get('sex')?.invalid && form.get('sex')?.touched">
+            <span *ngIf="form.get('sex').errors['required']">
+              Ви не вказали стать
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Категорія</mat-label>
+          <mat-select formControlName="category">
+            <ng-container *ngFor="let item of category">
+              <mat-option [value]="item.value">{{item.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="form.get('category')?.invalid && form.get('category')?.touched">
+            <span *ngIf="form.get('category').errors['required']">
+              Ви не вказали категорію товару
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Тип продукту</mat-label>
+          <mat-select formControlName="product">
+            <ng-container *ngFor="let item of product">
+              <mat-option [value]="item.value">{{item.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="form.get('product')?.invalid && form.get('product')?.touched">
+            <span *ngIf="form.get('product').errors['required']">
+              Ви не вказали тип товару
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Назва товару</mat-label>
+          <input formControlName="name" matInput placeholder="Назва товару">
+          <mat-error *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+            <span *ngIf="form.get('name').errors['required']">
+              Ви не вказали Назву товару
+            </span>
+            <span *ngIf="form.get('name').errors['minlength'] && form.get('name').errors['minlength']['requiredLength']">
+              Довжина назви товару повиненна бути не менше {{form.get('name').errors['minlength']['requiredLength']}} символів
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ціна</mat-label>
+          <input formControlName="price" matInput placeholder="Ціна" type="number">
+          <mat-error *ngIf="form.get('price')?.invalid && form.get('price')?.touched">
+            <span *ngIf="form.get('price').errors['required']">
+              Ви не вказали ціну товару
+            </span>
+            <span *ngIf="form.get('price').errors['min']">
+              Мінімальна ціна товару {{form.get('price').errors['min']['min']}} грн.
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Код</mat-label>
+          <input formControlName="code" matInput placeholder="Код">
+          <mat-error *ngIf="form.get('code')?.invalid && form.get('code')?.touched">
+            <span *ngIf="form.get('code').errors['required']">
+              Ви не вказали Код товару
+            </span>
+            <span *ngIf="form.get('code').errors['minlength'] && form.get('code').errors['minlength']['requiredLength']">
+              Довжина коду товару повиненна бути не менше {{form.get('code').errors['minlength']['requiredLength']}} символів
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <input
+          #load_image
+          type="file"
+          class="dn"
+          (change)="onFileUpload($event)"
+        >
+        <button
+          mat-raised-button
+          backgroundColor="gray-dark"
+          class="add-button"
+          type="button"
+          (click)="triggerClick()"
+          [disabled]="form.disabled"
+        > Додати зображення
+        </button>
+
+        <button
+          mat-raised-button
+          backgroundColor="gray-dark"
+          class="add-button"
+          type="button"
+          (click)="addSizeForm()"
+          [disabled]="form.disabled"
+        > Додати розмір
+        </button>
+
+        <ng-container formArrayName="sizes">
+          <ng-container *ngFor="let sizeForm of sizeForms; let i = index">
+            <div class="sizes" [formGroup]="sizeForm">
+              <mat-form-field appearance="outline">
+                <mat-label>Розмір</mat-label>
+                <input formControlName="size" matInput placeholder="Розмір">
+                <mat-error *ngIf="sizeForm.get('size')?.invalid && sizeForm.get('size')?.touched">
+                  <span *ngIf="sizeForm.get('size').errors['required']">
+                    Ви не вказали Розмір
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Кількість</mat-label>
+                <input formControlName="amount" matInput placeholder="Кількість" type="number">
+                <mat-error *ngIf="sizeForm.get('amount')?.invalid && sizeForm.get('amount')?.touched">
+                  <span *ngIf="sizeForm.get('amount').errors['required']">
+                    Ви не вказали кількість товару
+                  </span>
+                  <span *ngIf="sizeForm.get('amount').errors['min']">
+                    Мінімальна кількість товару {{sizeForm.get('amount').errors['min']['min']}}
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <button
+                mat-icon-button
+                (click)="deleteSizeForm(i)"
+                [disabled]="sizeForms.length <= 1"
+              > <mat-icon>delete_outline</mat-icon>
+              </button>
+            </div>
+
+          </ng-container>
+        </ng-container>
+
+        <button
+          mat-raised-button
+          backgroundColor="primary-yellow"
+          type="submit"
+          [disabled]="form.invalid || form.disabled"
+        > Зберегти
+        </button>
+      </div>
+    </div>
+
+    <ng-template #loader>
+      <div class="loader">
+        <app-loader></app-loader>
+      </div>
+    </ng-template>
+  </form>
+</div>

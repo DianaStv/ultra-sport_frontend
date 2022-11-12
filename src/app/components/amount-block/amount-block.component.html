@@ -1,0 +1,18 @@
+<div class="amount-block">
+
+  <button mat-icon-button *ngIf="amount === 1" (click)="delete()">
+    <mat-icon class="mat-icon-s20">delete_outline</mat-icon>
+  </button>
+
+  <button mat-icon-button *ngIf="amount > 1" (click)="remove()">
+    <mat-icon class="mat-icon-s20">remove</mat-icon>
+  </button>
+
+  <div class="amount">{{amount}}</div>
+  <button
+    mat-icon-button
+    (click)="add()"
+    [disabled]="amount >= maxAmount">
+    <mat-icon class="mat-icon-s22">add</mat-icon>
+  </button>
+</div>

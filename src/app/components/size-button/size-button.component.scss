@@ -1,0 +1,11 @@
+@import "../../../assets/theming/size_button";
+
+.size-block.selected {
+  border: 2px solid rgba(0, 0, 0, 0.8) !important;
+  padding: 7px 9px;
+}
+
+.size-block:hover {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}

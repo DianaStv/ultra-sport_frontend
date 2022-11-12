@@ -1,0 +1,10 @@
+.amount-block {
+  display: flex;
+  align-items: center;
+  width: 120px;
+  border: 1px solid #bdbdbd;;
+
+  .amount {
+    padding: 3px 14px 0;
+  }
+}

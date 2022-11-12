@@ -1,0 +1,15 @@
+@mixin mat-icon-size($size: 12px) {
+  font-size: $size + px !important;
+  height: $size + px !important;
+  width: $size + px !important;
+  line-height: $size + px !important;
+}
+
+// icons setting size
+$_icon-prefix: "mat-icon-s";
+
+@for $sizeValue from 12 through 78 {
+  .#{$_icon-prefix}#{$sizeValue} {
+    @include mat-icon-size($sizeValue);
+  }
+}

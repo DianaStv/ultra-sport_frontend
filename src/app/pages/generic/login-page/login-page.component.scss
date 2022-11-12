@@ -1,0 +1,55 @@
+.login-card:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 50%;
+  opacity: 0.4;
+  background-image: url('../../../../assets/images/sport.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: grayscale(100%);
+}
+
+.login-card {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12%;
+
+  .card-title {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 440px;
+    border-top: 2px solid black;
+    box-shadow: 0 0 4px #0000004d !important;
+
+    form {
+      padding: 40px 40px 60px;
+    }
+    .input-wrappers {
+      display: flex;
+      flex-direction: column;
+    }
+    .card-action {
+      width: 100%;
+      button {
+        margin-top: 15px;
+        width: 100%;
+        height: 48px;
+      }
+    }
+  }
+}
+

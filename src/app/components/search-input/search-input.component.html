@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline" backgroundColor="white">
+  <mat-label>{{placeholder}}</mat-label>
+  <input [formControl]="searchControl" matInput [placeholder]="placeholder">
+  <mat-icon matPrefix>search</mat-icon>
+  <button matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchInput()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

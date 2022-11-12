@@ -1,0 +1,23 @@
+<header>
+  <mat-toolbar class="header">
+    <button mat-icon-button (click)="changeSidenavState()">
+      <mat-icon class="mat-icon-s28">menu</mat-icon>
+    </button>
+
+    <div class="header-content">
+      <span class="title">ULTRA SPORT</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="openUserMenu()">
+        <mat-icon class="mat-icon-s28">person_outline</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="openOrderPage()"
+        [matBadge]="(ordersAmount$ | async).length || null"
+        matBadgePosition="after"
+      >
+        <mat-icon class="mat-icon-s28">add_shopping_cart</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</header>

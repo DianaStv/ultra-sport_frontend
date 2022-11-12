@@ -1,0 +1,39 @@
+<div class="page-wrapper">
+  <a class="return-back" (click)="back()">
+    <mat-icon class="mat-icon-s12">arrow_back_ios</mat-icon>
+    <p>Назад</p>
+  </a>
+  <div class="page-title">
+    <p>Замовлення №{{order?.order}}</p>
+  </div>
+
+  <ng-container *ngIf="!loading; else loader">
+    <div>
+      <mat-list role="list" class="list">
+        <ng-container *ngFor="let item of order.list; let i = index">
+          <mat-divider class="dashed-divider" *ngIf="i !== 0"></mat-divider>
+
+          <mat-list-item role="listitem" class="list-item" *ngIf="getCategory(item.categoryId) as category">
+            <div class="item-content" >
+              <div class="item-image">
+                <img [src]="category.imageSrc">
+              </div>
+              <div class="item-description">
+                <p class="name">{{category.name}}</p>
+                <p class="size">{{getSize(item.sizeId, category)}}</p>
+                <p class="price">{{category.price * item.amount}} грн</p>
+                <p class="amount"> Кількість: {{item.amount}}</p>
+              </div>
+            </div>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </div>
+  </ng-container>
+
+  <ng-template #loader>
+    <div class="loader">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</div>

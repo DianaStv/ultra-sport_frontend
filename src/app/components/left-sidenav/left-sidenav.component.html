@@ -1,0 +1,35 @@
+<div class="left-sidenav" backgroundColor="gray-dark">
+  <ng-container *ngFor="let link of links;">
+    <div class="simple-link" *ngIf="link.url; else expander">
+      <a [routerLink]="[link.url]">{{link.name}}</a>
+    </div>
+    <ng-template #expander>
+      <div class="multiple-links" *ngIf="link.sex">
+        <p>{{link.name}}</p>
+
+        <ng-container *ngFor="let sex of link.sex">
+          <mat-expansion-panel backgroundColor="gray-dark">
+            <mat-expansion-panel-header>
+              <mat-panel-title> {{sex.name}} </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="categories">
+              <ng-container *ngFor="let category of sex.categories; let i = index">
+                <div class="categories-list" >
+                  <p class="category-title">{{category.name}}</p>
+
+                  <ul class="category-items">
+                    <li *ngFor="let item of category.children">
+                      <a [routerLink]="[item.url]" [queryParams]="item.params">{{item.name}}</a>
+                    </li>
+                  </ul>
+                </div>
+                <mat-divider *ngIf="i !== (sex.categories.length-1)" vertical="true" borderColor="white"></mat-divider>
+              </ng-container>
+            </div>
+          </mat-expansion-panel>
+        </ng-container>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

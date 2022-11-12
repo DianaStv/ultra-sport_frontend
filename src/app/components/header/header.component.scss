@@ -1,0 +1,22 @@
+@import "../../../assets/theming/variables";
+
+.header {
+  background-color: $color-gray-dark;
+  min-height: $header-height;
+  color: $color-white;
+  border-bottom: 4px solid $color-accent;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    width: calc(1250px + 32px);
+    padding-right: 50px;
+    margin: auto;
+  }
+}
+
+.title {
+  font-style: italic;
+  font-size: 36px;
+  padding-left: 15px;
+}

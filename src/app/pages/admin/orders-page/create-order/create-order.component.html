@@ -1,0 +1,50 @@
+<div class="page-wrapper">
+  <a class="return-back" (click)="back()">
+    <mat-icon class="mat-icon-s12">arrow_back_ios</mat-icon>
+    <p>Назад</p>
+  </a>
+  <div class="page-title">
+    <p>Додати новий вид товару</p>
+  </div>
+
+  <div class="page-content" *ngIf="!loading; else loader">
+    <ng-container *ngIf="category">
+      <div class="image-block">
+        <img *ngIf="category.imageSrc" [src]="category.imageSrc">
+        <div *ngIf="!category.imageSrc" class="upload-image">
+          <mat-icon class="mat-icon-s48" color="gray-dark">cloud_upload</mat-icon>
+        </div>
+      </div>
+
+      <div class="description-block">
+        <div class="item-description">
+          <p class="name">{{category.name}} {{category.code}}</p>
+          <p class="price">{{category.price}} грн</p>
+          <p class="sizes-title">Таблиця розмірів:</p>
+          <div class="sizes">
+            <ng-container *ngFor="let size of category.sizes">
+              <app-size-button
+                [size]="size"
+                [selected]="selectedSize === size"
+                (addSize)="selectSize($event)"
+              ></app-size-button>
+            </ng-container>
+          </div>
+        </div>
+
+        <button
+          mat-raised-button
+          backgroundColor="primary-yellow"
+          (click)="addOrder()"
+          [disabled]="!selectedSize"
+        > Додати в кошик
+        </button>
+      </div>
+    </ng-container>
+  </div>
+  <ng-template #loader>
+    <div class="loader">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</div>

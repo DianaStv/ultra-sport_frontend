@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+@mixin mat-button-toggle-extended($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+
+  .mat-button-toggle-checked {
+    background-color: mat.get-color-from-palette($primary);
+    color: mat.get-color-from-palette($primary, default-contrast);
+  }
+}

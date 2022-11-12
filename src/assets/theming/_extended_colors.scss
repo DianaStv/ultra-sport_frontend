@@ -1,0 +1,166 @@
+@use '@angular/material' as mat;
+@import './variables';
+@mixin mat-color-extended($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground );
+  * {
+    &[color="warn"] {
+      color: mat.get-color-from-palette($warn);
+    }
+    &[color="primary"] {
+      color: mat.get-color-from-palette($primary);
+    }
+    &[color="accent"] {
+      color: mat.get-color-from-palette($accent);
+    }
+    &[color="black"] {
+      color: $color-black;
+    }
+    &[color="gray-dark"] {
+      color: $color-gray-dark;
+    }
+    &[backgroundColor="primary-yellow"] {
+      color: $color-black;
+      background: $color-accent;
+    }
+    &[backgroundColor="gray-dark"] {
+      color: $color-white !important;
+      background-color: $color-gray-dark;
+    }
+    &[backgroundColor="white"] {
+      color: $color-black;
+      background-color: $color-white;
+    }
+    &[borderColor="white"] {
+      border-color: $color-white;
+      opacity: 0.2;
+    }
+    &[borderColor="primary-yellow"] {
+      border-color: $color-accent;
+      opacity: 0.8;
+    }
+    &[borderColor="gray-dark"] {
+      border-top: $color-gray-dark !important;
+    }
+  }
+
+  /**
+  * MAT-EXPANSION_PANEL
+  **/
+  mat-expansion-panel {
+    &[backgroundColor="gray-dark"] {
+      box-shadow: none !important;
+      .mat-expansion-panel-header-title,
+      .mat-expansion-indicator::after {
+        color: $color-white !important;
+      }
+      .mat-expansion-panel-header.mat-expanded:hover {
+        background-color: inherit !important;
+      }
+      .mat-expansion-panel-header:hover {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+      }
+    }
+  }
+
+  /**
+  * MAT-EXPANSION_PANEL
+  **/
+  mat-form-field {
+    &[backgroundColor="white"] {
+      width: 100%;
+      .mat-form-field-infix {
+        padding: 0.7em 0 !important;
+      }
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+      .mat-form-field-infix {
+        border-top: 0.5em solid transparent;
+      }
+      .mat-form-field-label-wrapper {
+        top: -0.5em;
+        padding-top: 0.5em;
+      }
+      .mat-form-field-label {
+        top: 1.4em !important;
+      }
+      &.mat-form-field-can-float {
+        &.mat-form-field-should-float .mat-form-field-label {
+          transform: translateY(-1.2em) scale(0.75) !important;
+        }
+      }
+    }
+  }
+
+  /**
+  * MAT-SNACK_BAR
+  **/
+  .black-snack-bar {
+    color: rgba(255,255,255,.7);
+    background: $color-gray-dark !important;
+    box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
+                0px 6px 10px 0px rgb(0 0 0 / 14%),
+                0px 1px 18px 0px rgb(0 0 0 / 12%);
+
+    .mat-simple-snackbar-action button {
+      color: mat.get-color-from-palette($warn);
+    }
+  }
+
+  /**
+  * MAT-DIALOG
+  **/
+  .black-dialog {
+    .mat-dialog-container {
+      padding: 6px;
+      background: $color-gray-dark;
+    }
+  }
+
+  /**
+  * SPINNER
+  **/
+  .black-spinner {
+    border: 6px solid $color-white;
+    border-radius: 50%;
+    border-top: 6px solid $color-gray-dark;
+    border-right: 6px solid $color-gray-dark;
+    border-bottom: 6px solid $color-gray-dark;
+    width: 45px;
+    height: 45px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /**
+  * MAT-BADGE
+  **/
+  .mat-badge-content {
+    color: $color-black;
+    background: $color-accent;
+  }
+
+  /**
+  * MAT-DIVIDER
+  **/
+  .dashed-divider {
+    &.mat-divider {
+      border-top-style: dashed !important;
+    }
+  }
+}
