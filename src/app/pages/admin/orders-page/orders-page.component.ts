@@ -42,7 +42,7 @@ export class OrdersPageComponent extends Unsubscribe implements OnInit {
 
   loadCategories() {
     this.loading = true;
-    this.categoryService.getAll(this.params)
+    this.categoryService.getAllFiltered(this.params)
     .pipe(
       takeUntil(this.destroy)
     )

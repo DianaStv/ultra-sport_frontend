@@ -20,8 +20,20 @@ export class CategoryService {
     });
   }
 
+  getAllFiltered(params: any = {}): Observable<ICategoryResponse> {
+    return this.http.get<ICategoryResponse>('/api/category/filtered', {
+      params: new HttpParams({
+        fromObject: params
+      })
+    });
+  }
+
   getById(id: string): Observable<ICategory> {
     return this.http.get<ICategory>(`/api/category/${id}`);
+  }
+
+  getByIdFiltered(id: string): Observable<ICategory> {
+    return this.http.get<ICategory>(`/api/category/filtered/${id}`);
   }
 
   create(body: any): Observable<ICategory> {

@@ -35,7 +35,7 @@ export class CreateOrderComponent extends Unsubscribe implements OnInit {
       switchMap((params: Params) => {
         if(params['id']) {
           this.loading = true;
-          return this.categoryService.getById(params['id']);
+          return this.categoryService.getByIdFiltered(params['id']);
         }
         return of(null);
       })
