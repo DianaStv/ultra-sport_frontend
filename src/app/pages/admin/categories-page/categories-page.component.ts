@@ -96,6 +96,7 @@ export class CategoriesPageComponent extends Unsubscribe implements OnInit {
     )
     .subscribe(
       res => {
+        this.params.offset = 0;
         this.loadCategories();
         this.commonService.callMatSnackBar(res.message)
       },
