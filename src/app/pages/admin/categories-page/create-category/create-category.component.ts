@@ -24,6 +24,7 @@ export class CreateCategoryComponent extends Unsubscribe implements OnInit {
   imagePreview: string | ArrayBuffer = '';
 
   categoryId: string = null;
+  categoryObj: ICategory;
   loading: boolean = false;
 
   sex: IList[] = sexList;
@@ -79,6 +80,7 @@ export class CreateCategoryComponent extends Unsubscribe implements OnInit {
           for (let i = 0; i < category.sizes.length-1; i++) {
             this.addSizeForm()
           }
+          this.categoryObj = category;
           this.form.patchValue(category);
           this.imagePreview = category.imageSrc;
         }
@@ -135,6 +137,20 @@ export class CreateCategoryComponent extends Unsubscribe implements OnInit {
     const data = {
       ...this.form.value,
       imageSrc: this.image
+    }
+
+    if (this.categoryId) {
+      data.sizes = data.sizes.map((size: any) => {
+        const index = this.categoryObj.sizes.findIndex(item => item.size === size.size);
+        if (index !== -1) {
+          return {
+            ...size,
+            _id: this.categoryObj.sizes[index]._id
+          }
+        } else {
+          return size;
+        }
+      });
     }
 
     this.form.disable();

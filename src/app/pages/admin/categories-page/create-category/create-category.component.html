@@ -152,6 +152,7 @@
               </mat-form-field>
 
               <button
+                *ngIf="!categoryId"
                 mat-icon-button
                 (click)="deleteSizeForm(i)"
                 [disabled]="sizeForms.length <= 1"

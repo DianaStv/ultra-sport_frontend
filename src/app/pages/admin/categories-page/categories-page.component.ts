@@ -39,6 +39,7 @@ export class CategoriesPageComponent extends Unsubscribe implements OnInit {
     private route: ActivatedRoute
   ) {
     super();
+    this.params.offset = 0;
   }
 
   ngOnInit(): void {
